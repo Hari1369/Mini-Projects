@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop</title>
+</head>
+
+<body>
+    <div>
+        <h1>Store with Veg and Non-Veg</h1>
+        <u style="color: red;">
+            <h2 id="error10" style="color: red;"></h2>
+        </u>
+    </div>
+
+    <center>
+        <b>
+            <u>
+                <div style="font-size: x-large; color: #5C5CFF;" id="greet"></div>
+            </u>
+        </b>
+    </center>
+
+    <hr>
+
+    <div>
+        <label for="vegetables">Vegies:</label>
+        <div id="error1" style="color: red;"></div>
+        <div id="error2" style="color: red;"></div>
+        <div id="error3" style="color: red;"></div>
+    </div>
+
+    <hr>
+
+    <div style="margin-left: 50px;">
+        <input type="checkbox" name="veg" id="potato" value="30">Potato (Rs: 30 per-Kg)
+        <input type="number" id="potatoqty" min="0" disabled>
+
+        <input type="checkbox" name="veg" id="onion" value="40">Onion (Rs: 40 per-Kg)
+        <input type="number" id="onionqty" min="0" disabled>
+
+        <input type="checkbox" name="veg" id="tomato" value="25">Tomato (Rs: 25 per-Kg)
+        <input type="number" id="tomatoqty" min="0" disabled>
+    </div>
+
+    <br>
+    <hr>
+
+    <div>
+        <label for="Non-vegetables">Non-Veg:</label>
+        <div id="error4" style="color: red;"></div>
+        <div id="error5" style="color: red;"></div>
+        <div id="error6" style="color: red;"></div>
+    </div>
+
+    <hr>
+
+    <div style="margin-left: 50px;">
+        <input type="checkbox" name="Nveg" id="meat" value="120">Meat (Rs: 120 per-Kg)
+        <input type="number" id="meatqty" min="0" disabled>
+
+        <input type="checkbox" name="Nveg" id="fish" value="80">Fish (Rs: 80 per-Kg)
+        <input type="number" id="fishqty" min="0" disabled>
+
+        <input type="checkbox" name="Nveg" id="egg" value="86">Egg (Rs: 86 per-dozen)
+        <input type="number" id="eggqty" min="0" disabled>
+    </div>
+
+    <br>
+    <hr>
+
+    <div>
+        <label for="Fruits">Fruits:</label>
+        <div id="error7" style="color: red;"></div>
+        <div id="error8" style="color: red;"></div>
+        <div id="error9" style="color: red;"></div>
+    </div>
+
+    <hr>
+
+    <div style="margin-left: 50px;">
+        <input type="checkbox" name="fruit" id="apple" value="120">Apple (Rs: 120 per-Kg)
+        <input type="number" id="appleqty" min="0" disabled>
+
+        <input type="checkbox" name="fruit" id="orange" value="100">Orange (Rs: 100 per-Kg)
+        <input type="number" id="orangeqty" min="0" disabled>
+
+        <input type="checkbox" name="fruit" id="mango" value="200">Mango (Rs: 200 per-Kg)
+        <input type="number" id="mangoqty" min="0" disabled>
+    </div>
+
+    <br><br>
+
+    <div><u style="color: red;"><b><span id="pricepotato"></span></b></u></div>
+    <div><u style="color: red;"><b><span id="priceonion"></span></b></u></div>
+    <div><u style="color: red;"><b><span id="pricetomato"></span></b></u></div>
+
+    <br>
+
+    <div>
+        <label for="totalpricevegies" id="vegies">Total price of Vegetables: Rs </label>
+        <span id="veg1"> </span>
+    </div>
+
+    <br>
+
+    <div><u style="color: red;"><b><span id="pricemeat"></span></b></u></div>
+    <div><u style="color: red;"><b><span id="pricefish"></span></b></u></div>
+    <div><u style="color: red;"><b><span id="priceegg"></span></b></u></div>
+
+    <br>
+
+    <div>
+        <label for="totalpricevegies" id="Nvegies">Total price of Non-Vegetables: Rs </label>
+        <span id="Nveg1"> </span>
+    </div>
+
+    <br>
+
+    <div><u style="color: red;"><b><span id="priceapple"></span></b></u></div>
+    <div><u style="color: red;"><b><span id="priceorange"></span></b></u></div>
+    <div><u style="color: red;"><b><span id="pricemango"></span></b></u></div>
+
+    <br>
+
+    <div>
+        <label for="totalpricevegies" id="Fruit1">Total price of Fruits: Rs </label>
+        <span id="Fruit2"> </span>
+    </div>
+
+    <br>
+
+    <div>
+        <b>
+            <label style="color: red;" for="totalamountis">Total Amount: Rs</label>
+            <span style="color: red;" id="totAmt"></span>
+        </b>
+    </div>
+
+    <br>
+
+    <div>
+        <label for="totaldiscount">Discount: Rs </label>
+        <span id="discount"></span>
+        <br>
+        <span style="color: red;" id="discountinfo"></span>
+    </div>
+
+    <br>
+
+    <div>
+        <label for="GST">Tax on GST 18% Rs:</label>
+        <span id="GST"></span>
+    </div>
+
+    <br>
+
+    <div>
+        <label for="grandtotal">Grand Total Amount: </label>
+        <b>
+            <label style="color: red;" for="rs">Rs</label>
+            <u><span style="font-size:x-large; color: red;" id="Grand"></span></u>
+        </b>
+    </div>
+
+    <br>
+
+    <center>
+        <button id="submitButton" style="font-size: x-large;" onclick="submitform('submit')">Submit</button>
+        &nbsp;&nbsp;&nbsp;
+        <button id="resetButton" style="font-size: x-large;" onclick="submitform('reset')">Reset</button>
+    </center>
+
+    <script src="script.js"></script>
+</body>
+</html>
