@@ -1,72 +1,87 @@
-# 🛒 Online Mart - Veg, Non-Veg, and Fruits Billing System
+# Mini Projects 🚀
 
-## 📦 Features
-
-- Add items from Vegetables 🥕, Non-Veg 🍗, and Fruits 🍎
-- Quantity input enabled on checkbox selection
-- Dynamic pricing based on quantity
-- Discount calculation 💸
-- GST (18%) computation 📊
-- Grand Total display 🧾
-- Form validation + Reset functionality
+This repository contains small frontend mini-projects built using **HTML, CSS, and JavaScript**.  
+Each project is organized in its **own folder** and works independently.
 
 ---
 
-## 🧾 Product Categories
+## 📁 Projects Structure
 
-### ✅ Vegetables
-- Potato – Rs 30/kg
-- Onion – Rs 40/kg
-- Tomato – Rs 25/kg
-
-### 🍗 Non-Veg
-- Meat – Rs 120/kg
-- Fish – Rs 80/kg
-- Egg – Rs 86/dozen
-
-### 🍎 Fruits
-- Apple – Rs 120/kg
-- Orange – Rs 100/kg
-- Mango – Rs 200/kg
+```
+Mini Projects/
+│
+├── Hello-Mart/
+│   ├── mart.html
+│   └── script.js
+│
+└── Custom-Date-Picker/
+    └── test.html
+```
 
 ---
 
-## 🔁 Flow
+## 🛒 Project 1: Hello Mart
 
+### 📌 Description
+**Hello Mart** is a simple grocery billing web application where users can select items,
+enter quantities, and calculate the final bill with **discounts and GST** applied automatically.
 
----
+### ✨ Features
+- Categories:
+  - Vegetables
+  - Non-Vegetables
+  - Fruits
+- Quantity field enabled only after item selection
+- Automatic price calculation
+- Discount logic:
+  - 10% for orders ≥ ₹200
+  - 15% for orders ≥ ₹300
+  - 25% for orders ≥ ₹1000
+- GST calculation (18%)
+- Reset option
+- Input validation and error handling
 
-## 💵 Discount Slabs
+### 🧰 Technologies Used
+- HTML
+- JavaScript (Vanilla JS)
 
-- ≥ ₹1000 → 25% discount
-- ≥ ₹300 → 15% discount
-- ≥ ₹200 → 10% discount
-- < ₹200 → No discount
-
----
-
-## 📊 Calculations
-
-- **Total Amount** = Sum of selected item prices
-- **Discount** applied based on above slabs
-- **GST** = 18% of (Total - Discount)
-- **Grand Total** = (Total - Discount) + GST
-
----
-
-## 🧠 Tech Stack
-
-- HTML5
-- Vanilla JavaScript (No frameworks)
-- Pure client-side logic
-
----
-
-## 🎯 Buttons
-
-- **Submit** → Validates inputs, calculates totals
-- **Reset** → Clears everything and reloads page
+### ▶️ How to Run
+1. Open the `Hello-Mart` folder
+2. Open `mart.html` in any web browser
 
 ---
 
-> ℹ️ Make sure to link your `script.js` correctly and test in a browser environment.
+## 📅 Project 2: Custom Date Picker
+
+### 📌 Description
+A fully custom **date picker calendar** built using pure JavaScript without external libraries.
+Supports selecting **day, month, and year** interactively.
+
+### ✨ Features
+- Custom calendar UI
+- Day / Month / Year selection
+- Year range navigation
+- No third‑party libraries
+- Clean and responsive design
+
+### 🧰 Technologies Used
+- HTML
+- CSS
+- JavaScript (Vanilla JS)
+
+### ▶️ How to Run
+1. Open the `Custom-Date-Picker` folder
+2. Open `test.html` in any web browser
+
+---
+
+## 📌 Future Enhancements
+- Improve UI styling
+- Make projects mobile responsive
+- Add local storage support
+- Convert into reusable components
+
+---
+
+## 👨‍💻 Author
+**Hari Mondal**

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Custom Calendar Picker with Year Select</title>
+<style>
+  body { font-family: Arial, sans-serif; padding: 40px; background: #f0f0f0; }
+  .date-picker { display: flex; flex-direction: column; max-width: 250px; margin: auto; position: relative; }
+  label { margin-bottom: 6px; font-size: 14px; }
+  input { padding: 8px; font-size: 14px; border-radius: 4px; border: 1px solid #ccc; cursor: pointer; }
+
+  .calendar { display: none; position: absolute; top: 44px; left: 0; background: #fff; border: 1px solid #ccc; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); padding: 10px; z-index: 10; width: 250px; }
+  .calendar header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+  .calendar button { background: none; border: none; cursor: pointer; font-weight: bold; }
+  .days, .months, .years { display: grid; text-align: center; gap: 4px; }
+  .days { grid-template-columns: repeat(7, 30px); }
+  .day, .month, .year { padding: 6px; border-radius: 4px; cursor: pointer; }
+  .day:hover, .month:hover, .year:hover { background: #6C63FF; color: #fff; }
+  .day.selected, .month.selected, .year.selected { background: #00C2A8; color: #fff; font-weight: bold; }
+  .day.out { color: #aaa; }
+  .month-grid { grid-template-columns: repeat(3, 1fr); gap: 6px; }
+  .year-grid { grid-template-columns: repeat(4, 1fr); gap: 6px; }
+</style>
+</head>
+<body>
+
+<div class="date-picker">
+  <label for="dob">Date of Birth</label>
+  <input type="text" id="dob" readonly placeholder="Select a date">
+  <div class="calendar" id="calendar"></div>
+</div>
+
+<script>
+const input = document.getElementById('dob');
+const calendar = document.getElementById('calendar');
+let selectedDate = null;
+let currentMonth = new Date();
+let viewMode = 'days'; // 'days', 'months', 'years'
+
+function renderCalendar() {
+  calendar.innerHTML = '';
+
+  const header = document.createElement('header');
+  const prevBtn = document.createElement('button');
+  const nextBtn = document.createElement('button');
+  const title = document.createElement('div');
+  title.style.flex = '1';
+  title.style.textAlign = 'center';
+  title.style.cursor = 'pointer';
+
+  if(viewMode === 'days') {
+    const month = currentMonth.getMonth();
+    const year = currentMonth.getFullYear();
+    const firstDay = new Date(year, month, 1).getDay();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+    prevBtn.textContent = '<';
+    prevBtn.onclick = (e) => { e.stopPropagation(); currentMonth.setMonth(currentMonth.getMonth() - 1); renderCalendar(); };
+    nextBtn.textContent = '>';
+    nextBtn.onclick = (e) => { e.stopPropagation(); currentMonth.setMonth(currentMonth.getMonth() + 1); renderCalendar(); };
+    title.textContent = currentMonth.toLocaleString('default', { month: 'long', year: 'numeric' });
+    title.onclick = (e) => { e.stopPropagation(); viewMode = 'months'; renderCalendar(); };
+
+    header.appendChild(prevBtn);
+    header.appendChild(title);
+    header.appendChild(nextBtn);
+    calendar.appendChild(header);
+
+    const daysGrid = document.createElement('div');
+    daysGrid.className = 'days';
+
+    for(let i=0;i<firstDay;i++){ const empty = document.createElement('div'); empty.className='day out'; daysGrid.appendChild(empty); }
+    for(let d=1; d<=daysInMonth; d++){
+      const day = document.createElement('div');
+      day.className='day';
+      day.textContent = d;
+      if(selectedDate && selectedDate.getDate()===d && selectedDate.getMonth()===month && selectedDate.getFullYear()===year) day.classList.add('selected');
+      day.onclick = (e)=>{ e.stopPropagation(); selectedDate = new Date(year, month, d); input.value = selectedDate.toLocaleDateString(); calendar.style.display='none'; renderCalendar(); };
+      daysGrid.appendChild(day);
+    }
+    calendar.appendChild(daysGrid);
+
+  } else if(viewMode === 'months') {
+    prevBtn.textContent = '<'; prevBtn.onclick = (e)=>{ e.stopPropagation(); currentMonth.setFullYear(currentMonth.getFullYear()-1); renderCalendar(); };
+    nextBtn.textContent = '>'; nextBtn.onclick = (e)=>{ e.stopPropagation(); currentMonth.setFullYear(currentMonth.getFullYear()+1); renderCalendar(); };
+    title.textContent = currentMonth.getFullYear();
+    title.onclick = (e)=>{ e.stopPropagation(); viewMode='years'; renderCalendar(); };
+
+    header.appendChild(prevBtn); header.appendChild(title); header.appendChild(nextBtn);
+    calendar.appendChild(header);
+
+    const monthsGrid = document.createElement('div'); monthsGrid.className='months month-grid';
+    const monthNames=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    monthNames.forEach((m,i)=>{
+      const monthDiv=document.createElement('div'); monthDiv.className='month'; monthDiv.textContent=m;
+      if(selectedDate && selectedDate.getMonth()===i && selectedDate.getFullYear()===currentMonth.getFullYear()) monthDiv.classList.add('selected');
+      monthDiv.onclick=(e)=>{ e.stopPropagation(); currentMonth.setMonth(i); viewMode='days'; renderCalendar(); };
+      monthsGrid.appendChild(monthDiv);
+    });
+    calendar.appendChild(monthsGrid);
+
+  } else if(viewMode === 'years') {
+    prevBtn.textContent='<'; prevBtn.onclick=(e)=>{ e.stopPropagation(); currentMonth.setFullYear(currentMonth.getFullYear()-12); renderCalendar(); };
+    nextBtn.textContent='>'; nextBtn.onclick=(e)=>{ e.stopPropagation(); currentMonth.setFullYear(currentMonth.getFullYear()+12); renderCalendar(); };
+    title.textContent=`${currentMonth.getFullYear()}-${currentMonth.getFullYear()+11}`;
+
+    header.appendChild(prevBtn); header.appendChild(title); header.appendChild(nextBtn);
+    calendar.appendChild(header);
+
+    const yearsGrid=document.createElement('div'); yearsGrid.className='years year-grid';
+    const startYear=currentMonth.getFullYear()-currentMonth.getFullYear()%12;
+    for(let y=startYear; y<startYear+12; y++){
+      const yearDiv=document.createElement('div'); yearDiv.className='year'; yearDiv.textContent=y;
+      if(selectedDate && selectedDate.getFullYear()===y) yearDiv.classList.add('selected');
+      yearDiv.onclick=(e)=>{ e.stopPropagation(); currentMonth.setFullYear(y); viewMode='months'; renderCalendar(); };
+      yearsGrid.appendChild(yearDiv);
+    }
+    calendar.appendChild(yearsGrid);
+  }
+}
+
+input.addEventListener('click', (e)=>{ e.stopPropagation(); calendar.style.display = calendar.style.display==='block'?'none':'block'; viewMode='days'; renderCalendar(); });
+document.addEventListener('click', ()=>{ calendar.style.display='none'; });
+
+renderCalendar();
+</script>
+
+</body>
+</html>
